@@ -21,7 +21,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio | Consorcio Financiero</title>
+    <title>Inicio de Sesión | Consorcio Financiero</title>
     <style>
         :root {
             --azul-udb: #003366;
@@ -36,12 +36,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--gris-fondo);
             color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
         header {
             background-color: var(--azul-udb);
             color: white;
             padding: 30px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             text-align: center;
         }
         header h1 {
@@ -53,27 +55,51 @@
             font-size: 16px;
         }
         main {
-            padding: 40px 20px;
-            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         .estado {
-            margin: 20px auto;
-            font-size: 18px;
+            margin-bottom: 20px;
+            font-size: 16px;
             color: <%= conexionExitosa ? "var(--verde-ok)" : "var(--rojo-error)" %>;
             font-weight: bold;
         }
-        .boton {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 24px;
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+            width: 350px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
             background-color: var(--azul-claro);
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
         }
-        .boton:hover {
+        button:hover {
             background-color: #003f7f;
         }
         footer {
@@ -83,34 +109,29 @@
             background-color: #eaeaea;
             text-align: center;
         }
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1; /* Esto empuja el footer hacia abajo */
-            padding: 40px 20px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
 <header>
-    <h1>Consorcio Financiero</h1>
-    <p>Sistema institucional de gestión académica</p>
+    <h1>CONSORCIO FINANCIERO</h1>
+    <p>Bienvenido/a</p>
 </header>
 
 <main>
-    <h2>Bienvenido al sistema</h2>
     <p class="estado"><%= estadoConexion %></p>
-    <a class="boton" href="#">Acceder al módulo principal</a>
+    <form action="login" method="post">
+        <label for="idUsuario">Usuario (ID):</label>
+        <input type="text" name="idUsuario" id="idUsuario" required>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" name="contrasena" id="contrasena" required>
+
+        <button type="submit">Iniciar Sesión</button>
+    </form>
 </main>
 
 <footer>
-    &copy; 2025 Universidad Don Bosco — Proyecto de Cátedra
+    Términos y Condiciones | Políticas de Privacidad
 </footer>
 </body>
 </html>
