@@ -98,7 +98,19 @@
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
+            margin-bottom: 10px;
         }
+        .usuarionew{
+            text-align: center;
+        }
+        .usuarionew a {
+            text-decoration: none;
+            color: #2b2bba;
+        }
+        .usuarionew a:hover {
+            text-decoration: underline;
+        }
+
         button:hover {
             background-color: #003f7f;
         }
@@ -127,6 +139,9 @@
         <input type="password" name="contrasena" id="contrasena" required>
 
         <button type="submit">Iniciar Sesión</button>
+        <div class="usuarionew">
+        <a href="usuario/registrarUsuario.jsp">Registrar un Usuario</a>
+        </div>
     </form>
 </main>
 

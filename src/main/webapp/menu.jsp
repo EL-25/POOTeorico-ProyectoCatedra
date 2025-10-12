@@ -86,7 +86,7 @@
     <h2>Seleccione una opción</h2>
     <div class="botonera">
         <a class="boton" href="consorcio/registrarConsorcio.jsp">Registrar Consorcio</a>
-        <a class="boton" href="usuario/registrarUsuario.jsp">Registrar Usuario</a>
+        <a class="boton" href="institucion/registrarInstitucion.jsp">Registrar una Institución</a>
         <a class="boton" href="#">Ver Datos Guardados</a>
         <a class="boton" href="index.jsp">Salir del Sistema</a>
     </div>
