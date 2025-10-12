@@ -8,6 +8,7 @@
         :root {
             --azul-udb: #003366;
             --azul-claro: #0055a5;
+            --rojo-salida: #c62828;
             --gris-fondo: #f4f6f9;
         }
         body {
@@ -23,7 +24,7 @@
         header {
             background-color: var(--azul-udb);
             color: white;
-            padding: 30px 0;
+            padding: 30px 0 10px;
             text-align: center;
         }
         header h1 {
@@ -31,8 +32,8 @@
             font-size: 28px;
         }
         header p {
-            margin: 5px 0 0;
-            font-size: 16px;
+            margin: 10px 0 0;
+            font-size: 18px;
         }
         main {
             flex: 1;
@@ -42,9 +43,11 @@
             justify-content: center;
             padding: 40px 20px;
         }
-        h2 {
+        .intro {
+            font-size: 20px;
             color: var(--azul-claro);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-weight: bold;
         }
         .botonera {
             display: flex;
@@ -67,6 +70,12 @@
         .boton:hover {
             background-color: #003f7f;
         }
+        .boton-salir {
+            background-color: var(--rojo-salida);
+        }
+        .boton-salir:hover {
+            background-color: #a00000;
+        }
         footer {
             padding: 20px;
             font-size: 13px;
@@ -79,16 +88,18 @@
 <body>
 <header>
     <h1>CONSORCIO FINANCIERO</h1>
-    <p>Menú Principal</p>
+    <p>Bienvenido al sistema</p>
 </header>
 
 <main>
-    <h2>Seleccione una opción</h2>
+    <div class="intro">Seleccione una opción</div>
     <div class="botonera">
         <a class="boton" href="consorcio/registrarConsorcio.jsp">Registrar Consorcio</a>
         <a class="boton" href="institucion/registrarInstitucion.jsp">Registrar una Institución</a>
+        <a class="boton" href="cliente/registrarCliente.jsp">Registrar Cliente</a>
+        <a class="boton" href="cliente/asociarCliente.jsp">Asociar Cliente a Institución</a>
         <a class="boton" href="#">Ver Datos Guardados</a>
-        <a class="boton" href="index.jsp">Salir del Sistema</a>
+        <a class="boton boton-salir" href="index.jsp">Salir del Sistema</a>
     </div>
 </main>
 

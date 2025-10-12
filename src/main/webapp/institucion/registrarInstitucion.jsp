@@ -58,6 +58,20 @@
         .boton:hover {
             background-color: #003f7f;
         }
+        .volver {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 10px;
+            background-color: #777;
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+        }
+        .volver:hover {
+            background-color: #555;
+        }
         .error {
             color: var(--rojo-error);
             font-weight: bold;
@@ -88,6 +102,7 @@
         <input type="text" id="idConcorcio" name="idConcorcio" required pattern="[0-9]{1,}" title="Solo números">
 
         <button type="submit" class="boton">Guardar</button>
+        <a href="${pageContext.request.contextPath}/menu.jsp" class="volver">Volver</a>
 
         <%
             String error = (String) request.getAttribute("mensajeError");

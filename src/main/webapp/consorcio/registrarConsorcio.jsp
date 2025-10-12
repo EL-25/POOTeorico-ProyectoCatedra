@@ -63,6 +63,16 @@
             font-weight: bold;
             margin-top: 10px;
         }
+        .volver {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 10px;
+            background-color: #777;
+        }
+        .volver:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +88,7 @@
         <input type="text" id="nombreConsorcio" name="nombreConsorcio" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,}" title="Solo letras, mínimo 3 caracteres">
 
         <button type="submit" class="boton">Guardar</button>
+        <a href="${pageContext.request.contextPath}/menu.jsp" class="boton volver">Volver</a>
 
         <%
             String error = (String) request.getAttribute("mensajeError");
