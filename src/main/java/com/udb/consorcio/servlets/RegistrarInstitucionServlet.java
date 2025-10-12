@@ -24,7 +24,14 @@ public class RegistrarInstitucionServlet extends HttpServlet {
         String idConcorcio = request.getParameter("idConcorcio");
 
         if (esVacio(nombre) || esVacio(tipo) || esVacio(fechaFundacion) || esVacio(idConcorcio)) {
-            request.setAttribute("mensajeError", "¡DATOS INVÁLIDOS O CAMPOS VACÍOS!");
+            request.setAttribute("mensajeError", "campos");
+            request.getRequestDispatcher("institucion/errorInstitucion.jsp").forward(request, response);
+            return;
+        }
+
+        // Validación de fecha (opcional, si querés detectar formato inválido)
+        if (!fechaFundacion.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            request.setAttribute("mensajeError", "fecha");
             request.getRequestDispatcher("institucion/errorInstitucion.jsp").forward(request, response);
             return;
         }
@@ -43,7 +50,7 @@ public class RegistrarInstitucionServlet extends HttpServlet {
             request.setAttribute("mensajeExito", "REGISTRO COMPLETADO CON ¡ÉXITO!");
             request.getRequestDispatcher("institucion/registroExitosoInstitucion.jsp").forward(request, response);
         } else {
-            request.setAttribute("mensajeError", "¡NO SE PUDO REGISTRAR LA INSTITUCIÓN!");
+            request.setAttribute("mensajeError", "duplicado");
             request.getRequestDispatcher("institucion/errorInstitucion.jsp").forward(request, response);
         }
     }

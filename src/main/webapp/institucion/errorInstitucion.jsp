@@ -62,11 +62,22 @@
     <h1>Error en el Registro de Institución Financiera</h1>
 </header>
 <main>
-    <h2>
-        <%= request.getAttribute("mensajeError") != null
-                ? request.getAttribute("mensajeError")
-                : "¡Esta institución ya existe o hubo un error durante el registro!" %>
-    </h2>
+    <%
+        String mensajeError = (String) request.getAttribute("mensajeError");
+        String mensajeMostrar;
+
+        if ("duplicado".equals(mensajeError)) {
+            mensajeMostrar = "¡La institución ya existe!";
+        } else if ("campos".equals(mensajeError)) {
+            mensajeMostrar = "¡Datos inválidos o campos vacíos!";
+        } else if ("fecha".equals(mensajeError)) {
+            mensajeMostrar = "¡Fecha incorrecta!";
+        } else {
+            mensajeMostrar = "¡Hubo un error durante el registro!";
+        }
+    %>
+    <h2><%= mensajeMostrar %></h2>
+
     <div class="botonera">
         <a href="<%= request.getContextPath() %>/institucion/registrarInstitucion.jsp" class="boton">Intentar de Nuevo</a>
         <a href="<%= request.getContextPath() %>/index.jsp" class="boton">Volver al Menú Principal</a>
