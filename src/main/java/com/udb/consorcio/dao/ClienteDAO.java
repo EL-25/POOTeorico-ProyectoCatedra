@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClienteDAO {
+
     public boolean insertarCliente(Cliente cliente) {
         try (Connection conn = Conexion.getConnection()) {
             if (conn != null && !existeCliente(conn, cliente.getDui())) {
@@ -33,15 +34,57 @@ public class ClienteDAO {
         return false;
     }
 
-    private boolean existeCliente(Connection conn, String dui) {
+    public boolean existeCliente(String dui) {
         String sql = "SELECT dui FROM cliente WHERE dui = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, dui);
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next(); // Si hay resultado, ya existe
             }
         } catch (SQLException e) {
             System.out.println("Error al verificar existencia de cliente: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean clienteYaAsociado(String dui) {
+        String sql = "SELECT COUNT(*) FROM cliente_institucion WHERE id_cliente = ?";
+        try (Connection conn = Conexion.getConnection()) {
+            // Primero obtenemos el id_cliente desde el DUI
+            String idQuery = "SELECT id_cliente FROM cliente WHERE dui = ?";
+            try (PreparedStatement idStmt = conn.prepareStatement(idQuery)) {
+                idStmt.setString(1, dui);
+                try (ResultSet idRs = idStmt.executeQuery()) {
+                    if (idRs.next()) {
+                        int idCliente = idRs.getInt("id_cliente");
+
+                        // Ahora verificamos si está asociado
+                        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                            stmt.setInt(1, idCliente);
+                            try (ResultSet rs = stmt.executeQuery()) {
+                                return rs.next() && rs.getInt(1) > 0;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al verificar asociación de cliente: " + e.getMessage());
+        }
+        return false;
+    }
+
+    // Metodo interno para insertarCliente
+    private boolean existeCliente(Connection conn, String dui) {
+        String sql = "SELECT dui FROM cliente WHERE dui = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, dui);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al verificar existencia interna de cliente: " + e.getMessage());
         }
         return false;
     }

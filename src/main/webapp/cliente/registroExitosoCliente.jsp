@@ -21,7 +21,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .mensaje-exito h2 {
-            color: green;
+            color: #2e7d32; /* verde institucional */
             margin-bottom: 20px;
         }
         .boton {
@@ -41,7 +41,8 @@
 <body>
 <div class="mensaje-exito">
     <h2>REGISTRO COMPLETADO CON ¡ÉXITO!</h2>
-    <a href="../menu.jsp" class="boton">Volver al Menú</a>
+    <a href="registrarCliente.jsp" class="boton">Registrar Otro Cliente</a>
+    <a href="../menu.jsp" class="boton" style="margin-left: 10px;">Menú Principal</a>
 </div>
 </body>
 </html>

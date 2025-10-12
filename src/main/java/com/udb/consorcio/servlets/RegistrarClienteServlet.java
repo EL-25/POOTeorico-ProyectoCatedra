@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.*;
 
 @WebServlet("/RegistrarClienteServlet")
 public class RegistrarClienteServlet extends HttpServlet {
@@ -34,6 +35,7 @@ public class RegistrarClienteServlet extends HttpServlet {
             response.sendRedirect("cliente/errorCliente.jsp?error=campos");
             return;
         }
+
         // Validación de formato DUI
         if (!dui.matches("\\d{8}-\\d")) {
             response.sendRedirect("cliente/errorCliente.jsp?error=formato");
@@ -43,20 +45,41 @@ public class RegistrarClienteServlet extends HttpServlet {
         try {
             int idInstitucion = Integer.parseInt(idInstitucionStr);
 
+            // Verificar si el cliente ya existe
+            ClienteDAO dao = new ClienteDAO();
+            boolean existe = dao.existeCliente(dui);
+
+            if (existe) {
+                // Verificar si ya está asociado
+                boolean yaAsociado = dao.clienteYaAsociado(dui);
+                if (yaAsociado) {
+                    request.setAttribute("mensajeError", "Cliente ya está asociado a una institución.");
+                    request.getRequestDispatcher("cliente/errorCliente.jsp").forward(request, response);
+                    return;
+                } else {
+                    request.setAttribute("mensajeInfo", "Cliente: no se relaciona con institución.");
+                    request.getRequestDispatcher("cliente/errorCliente.jsp").forward(request, response);
+                    return;
+                }
+            }
+
+            // Si no existe, registrar cliente normalmente
             Cliente cliente = new Cliente(dui, nombre, fechaNacimiento, genero,
                     departamento, municipio, complemento, idInstitucion);
 
-            ClienteDAO dao = new ClienteDAO();
             boolean registrado = dao.insertarCliente(cliente);
 
             if (registrado) {
                 response.sendRedirect("cliente/registroExitosoCliente.jsp");
             } else {
-                response.sendRedirect("cliente/errorCliente.jsp?error=duplicado");
+                response.sendRedirect("cliente/errorCliente.jsp?error=falloRegistro");
             }
 
         } catch (NumberFormatException e) {
             response.sendRedirect("cliente/errorCliente.jsp?error=formato");
+        } catch (Exception e) {
+            request.setAttribute("mensajeError", "Error inesperado: " + e.getMessage());
+            request.getRequestDispatcher("cliente/errorCliente.jsp").forward(request, response);
         }
     }
 }

@@ -5,10 +5,25 @@
 
     if ("campos".equals(tipoError)) {
         mensaje = "¡DATOS INVÁLIDOS O CAMPOS VACÍOS!";
-    } else if ("duplicado".equals(tipoError)) {
-        mensaje = "¡EL CLIENTE YA ESTÁ REGISTRADO!";
+    } else if ("falloRegistro".equals(tipoError)) {
+        mensaje = "¡No se pudo registrar el cliente. Intente nuevamente.!";
     } else if ("formato".equals(tipoError)) {
         mensaje = "¡FORMATO DE DATOS INCORRECTO!";
+    }
+
+    // Mensajes dinámicos desde el servlet
+    String mensajeError = (String) request.getAttribute("mensajeError");
+    String mensajeInfo = (String) request.getAttribute("mensajeInfo");
+    if (mensajeError != null) {
+        mensaje = mensajeError;
+    } else if (mensajeInfo != null) {
+        mensaje = mensajeInfo;
+    }
+
+    // Color institucional según tipo de mensaje
+    String color = "red";
+    if (mensajeInfo != null) {
+        color = "#2e7d32"; // verde institucional
     }
 %>
 <!DOCTYPE html>
@@ -33,7 +48,6 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .mensaje-error h2 {
-            color: red;
             margin-bottom: 20px;
         }
         .boton {
@@ -52,8 +66,9 @@
 </head>
 <body>
 <div class="mensaje-error">
-    <h2><%= mensaje %></h2>
-    <a href="registrarCliente.jsp" class="boton">Cerrar</a>
+    <h2 style="color:<%= color %>"><%= mensaje %></h2>
+    <a href="cliente/registrarCliente.jsp" class="boton">Volver al formulario</a>
+    <a href="../menu.jsp" class="boton" style="margin-left: 10px;">Menú Principal</a>
 </div>
 </body>
 </html>
