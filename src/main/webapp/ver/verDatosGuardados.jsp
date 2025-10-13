@@ -65,12 +65,27 @@
             border-radius: 4px;
             min-height: 60px;
         }
+        .error {
+            color: var(--rojo-error);
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
     <script>
         function actualizarEtiqueta() {
             const tipo = document.getElementById("tipo").value;
             const etiqueta = document.getElementById("etiqueta-id");
-            etiqueta.textContent = tipo === "cliente" ? "DUI:" : "ID:";
+            const idInput = document.getElementById("id");
+
+            if (tipo === "cliente") {
+                etiqueta.textContent = "DUI:";
+                idInput.pattern = "\\d{8}-\\d";
+                idInput.title = "Formato: 00000000-0";
+            } else {
+                etiqueta.textContent = "ID:";
+                idInput.removeAttribute("pattern");
+                idInput.removeAttribute("title");
+            }
         }
     </script>
 </head>
@@ -98,7 +113,11 @@
         String tipo = (String) request.getAttribute("tipo");
         DatosGuardados datos = (DatosGuardados) request.getAttribute("datos");
 
-        if ("consorcio".equals(tipo) && datos.getIdConsorcio() != null) {
+        if (tipo != null && datos == null) {
+    %>
+    <div class="error">No se encontraron datos para la entidad solicitada.</div>
+    <%
+    } else if ("consorcio".equals(tipo) && datos.getIdConsorcio() != null) {
     %>
     <div class="grupo">
         <label>ID Consorcio:</label>
@@ -157,7 +176,11 @@
     <%
         }
     %>
+
+    <!-- Botón para volver al menú -->
+    <form action="../menu.jsp" method="get">
+        <button type="submit" class="boton">Volver</button>
+    </form>
 </main>
 </body>
 </html>
-

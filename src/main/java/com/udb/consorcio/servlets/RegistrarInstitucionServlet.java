@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet("/registrarInstitucion")
 public class RegistrarInstitucionServlet extends HttpServlet {
@@ -29,9 +30,19 @@ public class RegistrarInstitucionServlet extends HttpServlet {
             return;
         }
 
-        // Validación de fecha (opcional, si querés detectar formato inválido)
+        // Validación de formato de fecha
         if (!fechaFundacion.matches("\\d{4}-\\d{2}-\\d{2}")) {
             request.setAttribute("mensajeError", "fecha");
+            request.getRequestDispatcher("institucion/errorInstitucion.jsp").forward(request, response);
+            return;
+        }
+
+        // Validación de fecha futura
+        LocalDate fechaIngresada = LocalDate.parse(fechaFundacion);
+        LocalDate hoy = LocalDate.now();
+
+        if (fechaIngresada.isAfter(hoy)) {
+            request.setAttribute("mensajeError", "futura");
             request.getRequestDispatcher("institucion/errorInstitucion.jsp").forward(request, response);
             return;
         }

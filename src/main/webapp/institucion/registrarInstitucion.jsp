@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -96,6 +97,7 @@
         </select>
 
         <label for="fechaFundacion">Fecha de Fundación:</label>
+        <!-- max desactivado temporalmente para demostrar validación backend -->
         <input type="date" id="fechaFundacion" name="fechaFundacion" required>
 
         <label for="idConcorcio">Consorcio que pertenece (ID numérico):</label>
@@ -107,13 +109,18 @@
         <%
             String error = (String) request.getAttribute("mensajeError");
             if (error != null) {
+                if ("futura".equals(error)) {
+        %>
+        <p class="error">La fecha de fundación no puede ser posterior a la fecha actual.</p>
+        <%
+        } else {
         %>
         <p class="error"><%= error %></p>
         <%
+                }
             }
         %>
     </form>
 </main>
 </body>
 </html>
-

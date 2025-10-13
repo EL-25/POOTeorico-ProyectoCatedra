@@ -72,6 +72,8 @@
             mensajeMostrar = "¡Datos inválidos o campos vacíos!";
         } else if ("fecha".equals(mensajeError)) {
             mensajeMostrar = "¡Fecha incorrecta!";
+        } else if ("futura".equals(mensajeError)) {
+            mensajeMostrar = "¡La fecha de fundación no puede ser posterior a la fecha actual!";
         } else {
             mensajeMostrar = "¡Hubo un error durante el registro!";
         }
@@ -80,7 +82,7 @@
 
     <div class="botonera">
         <a href="<%= request.getContextPath() %>/institucion/registrarInstitucion.jsp" class="boton">Intentar de Nuevo</a>
-        <a href="<%= request.getContextPath() %>/index.jsp" class="boton">Volver al Menú Principal</a>
+        <a href="<%= request.getContextPath() %>/menu.jsp" class="boton">Volver al Menú Principal</a>
     </div>
 </main>
 </body>

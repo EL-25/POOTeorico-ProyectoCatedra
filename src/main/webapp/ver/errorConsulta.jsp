@@ -41,9 +41,11 @@
 <body>
 <div class="contenedor">
     <h1>Error al consultar</h1>
-    <p><%= request.getAttribute("error") %></p>
+    <p>
+        <%= request.getAttribute("error") != null ? request.getAttribute("error") : "No se recibió mensaje de error." %>
+    </p>
     <a href="<%= request.getContextPath() %>/ver/verDatosGuardados.jsp">Volver al formulario</a>
+    <a href="<%= request.getContextPath() %>/menu.jsp">Ir al menú</a>
 </div>
 </body>
 </html>
-
