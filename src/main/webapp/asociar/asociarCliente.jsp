@@ -141,6 +141,11 @@
 
         <button type="submit" class="boton">ASOCIAR CLIENTE</button>
     </form>
+
+    <!-- 🔙 Botón para volver al menú -->
+    <form action="../menu.jsp" method="get">
+        <button type="submit" class="boton">Volver al Menú</button>
+    </form>
 </main>
 </body>
 </html>
