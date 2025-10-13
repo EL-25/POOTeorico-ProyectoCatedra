@@ -98,7 +98,7 @@
         <a class="boton" href="institucion/registrarInstitucion.jsp">Registrar una Institución</a>
         <a class="boton" href="cliente/registrarCliente.jsp">Registrar Cliente</a>
         <a class="boton" href="asociar/asociarCliente.jsp">Asociar Cliente a Institución</a>
-        <a class="boton" href="#">Ver Datos Guardados</a>
+        <a class="boton" href="ver/verDatosGuardados.jsp">Ver Datos Guardados</a>
         <a class="boton boton-salir" href="index.jsp">Salir del Sistema</a>
     </div>
 </main>

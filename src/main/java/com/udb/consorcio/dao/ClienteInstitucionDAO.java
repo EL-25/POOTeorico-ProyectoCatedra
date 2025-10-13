@@ -11,7 +11,7 @@ public class ClienteInstitucionDAO {
         this.con = con;
     }
 
-    // ✅ Asociar cliente a institución (evita duplicados)
+    //  Asociar cliente a institución (evita duplicados)
     public boolean asociarCliente(ClienteInstitucion ci) throws SQLException {
         String sql = "SELECT COUNT(*) FROM cliente_institucion WHERE id_cliente = ? AND id_institucion = ?";
         try (PreparedStatement check = con.prepareStatement(sql)) {
@@ -30,7 +30,7 @@ public class ClienteInstitucionDAO {
         }
     }
 
-    // ✅ Obtener instituciones asociadas (por nombre)
+    //  Obtener instituciones asociadas (por nombre)
     public List<String> obtenerInstitucionesAsociadas(int idCliente) {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT i.nombre FROM institucion i " +
@@ -46,7 +46,7 @@ public class ClienteInstitucionDAO {
         return lista;
     }
 
-    // ✅ Obtener instituciones no asociadas (por nombre)
+    // Obtener instituciones no asociadas (por nombre)
     public List<String> obtenerInstitucionesNoAsociadas(int idCliente) {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT nombre FROM institucion WHERE id_institucion NOT IN " +
@@ -61,7 +61,7 @@ public class ClienteInstitucionDAO {
         return lista;
     }
 
-    // ✅ Obtener nombre del cliente por DUI
+    // Obtener nombre del cliente por DUI
     public String obtenerNombrePorDui(String dui) {
         String sql = "SELECT nombre FROM cliente WHERE dui = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
@@ -74,7 +74,7 @@ public class ClienteInstitucionDAO {
         return "";
     }
 
-    // ✅ Obtener ID del cliente por DUI
+    //  Obtener ID del cliente por DUI
     public int obtenerIdClientePorDui(String dui) {
         String sql = "SELECT id_cliente FROM cliente WHERE dui = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {

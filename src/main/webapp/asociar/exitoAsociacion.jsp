@@ -1,38 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error en la Asociación</title>
+    <title>Asociación Exitosa</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #ffebee;
+            background-color: #e8f5e9;
             text-align: center;
             padding: 50px;
         }
         h1 {
-            color: #c62828;
-        }
-        p {
-            color: #b71c1c;
-            font-weight: bold;
+            color: #2e7d32;
         }
         a {
             display: inline-block;
             margin-top: 30px;
             padding: 10px 20px;
-            background-color: #c62828;
+            background-color: #2e7d32;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
         a:hover {
-            background-color: #b71c1c;
+            background-color: #1b5e20;
         }
     </style>
 </head>
 <body>
-<h1>Ocurrió un error al asociar el cliente</h1>
-<p><%= request.getAttribute("error") %></p>
+<h1>¡Cliente asociado exitosamente!</h1>
 <a href="${pageContext.request.contextPath}/asociar/asociarCliente.jsp">Volver</a>
 </body>
 </html>
