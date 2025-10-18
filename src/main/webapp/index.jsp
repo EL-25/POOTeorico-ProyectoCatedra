@@ -6,7 +6,7 @@
     try {
         Connection conn = Conexion.getConnection();
         if (conn != null){
-            estadoConexion = "Conexión exitosa a la Base de Datos.";
+            estadoConexion = "Acceda a su cuenta";
             conexionExitosa = true;
         } else {
             estadoConexion = "No se pudo establecer la conexión.";
@@ -45,6 +45,7 @@
             color: white;
             padding: 30px 0;
             text-align: center;
+            margin-bottom: 20px;
         }
         header h1 {
             margin: 0;
@@ -121,6 +122,14 @@
             background-color: #eaeaea;
             text-align: center;
         }
+        .mensaje-login {
+            color: var(--verde-ok);
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -130,7 +139,7 @@
 </header>
 
 <main>
-    <p class="estado"><%= estadoConexion %></p>
+    <div class="mensaje-login"><%= estadoConexion %></div>
     <form action="login" method="post">
         <label for="idUsuario">Usuario (ID):</label>
         <input type="text" name="idUsuario" id="idUsuario" required>
